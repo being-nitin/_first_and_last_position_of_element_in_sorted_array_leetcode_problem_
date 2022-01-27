@@ -22,24 +22,54 @@ public class Main {
     Output: [-1,-1]
 	 */
      int[] arr = {5,7,7,8,8,10};
-        System.out.println(Arrays.toString(search(arr,6 )));
+        System.out.println(Arrays.toString(binarySearch(arr,7 )));
+
     }
-    public static int[] search(int[] arr,int target){
+    public static int[] binarySearch(int[] arr,int target){
+        int[] result = new int[2];
+        result[0] = binaryASearch1(arr,target);
+        result[1] = binarySearch2(arr,target);
+        return result;
+    }
+    public static int binaryASearch1(int[] arr,int target){
         int start = 0;
         int end = arr.length-1;
+        int result=-1;
         while(start<=end){
             int mid = start+(end-start)/2;
-            if(target>arr[mid]){
+            if(target==arr[mid]){
+                result = mid;
+                // found but search in the left part too for the first occurance.
+                end = mid-1;
+            }
+            else if(target>arr[mid]){
                 start = mid+1;
             }
             else if(target<arr[mid]){
                 end = mid-1;
             }
-            else{
-                return new int[]{mid-1,mid};
+        }
+        return result;
+    }
+    public static int binarySearch2(int[] arr,int target){
+        int start = 0;
+        int end = arr.length-1;
+        int result = -1;
+        while (start<=end){
+            int mid = start +(end-start)/2;
+            if(target==arr[mid]){
+                result = mid;
+                // found burt search in the right part too for the last occurance.
+                start = mid+1;
+            }
+            else if(target>arr[mid]){
+                start = mid+1;
+            }
+            else if(target<arr[mid]){
+                end = mid-1;
             }
         }
-        return new int[]{-1,-1};
+        return result;
     }
 }
 
