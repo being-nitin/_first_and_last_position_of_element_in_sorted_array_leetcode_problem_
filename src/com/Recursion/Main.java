@@ -72,7 +72,7 @@ public class Main {
         return result;
     }
 }
-
+// if it doesn't found the element it will return [-1,-1]
 
 
 
